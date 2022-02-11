@@ -1,0 +1,1 @@
+alter table incomes alter column value TYPE numeric(10, 2);
