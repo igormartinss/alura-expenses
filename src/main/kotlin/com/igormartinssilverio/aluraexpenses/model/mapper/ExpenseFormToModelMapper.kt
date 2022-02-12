@@ -1,13 +1,13 @@
 package com.igormartinssilverio.aluraexpenses.model.mapper
 
 import com.igormartinssilverio.aluraexpenses.model.Expense
-import com.igormartinssilverio.aluraexpenses.model.form.ExpenseCreateForm
+import com.igormartinssilverio.aluraexpenses.model.form.ExpenseForm
 import org.springframework.stereotype.Component
 
 @Component
-class ExpenseFormToModelMapper : Mapper<ExpenseCreateForm, Expense> {
+class ExpenseFormToModelMapper : Mapper<ExpenseForm, Expense> {
 
-    override fun map(form: ExpenseCreateForm) : Expense  {
+    override fun map(form: ExpenseForm) : Expense  {
         return Expense(
             description = form.description,
             value = form.value,

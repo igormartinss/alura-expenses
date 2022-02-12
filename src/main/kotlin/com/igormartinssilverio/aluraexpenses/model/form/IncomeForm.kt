@@ -5,7 +5,7 @@ import java.time.LocalDate
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.NotEmpty
 
-data class IncomeCreateForm (
+data class IncomeForm (
     @field:NotEmpty(message = "Description should not be empty!")
     val description: String,
     @field:NotNull(message = "Value field is required!")
