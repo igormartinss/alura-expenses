@@ -9,6 +9,7 @@ import com.igormartinssilverio.aluraexpenses.model.view.ExpenseView
 import com.igormartinssilverio.aluraexpenses.repository.ExpenseRepository
 import com.igormartinssilverio.aluraexpenses.service.ExpenseService
 import org.springframework.stereotype.Service
+import java.time.YearMonth
 
 @Service
 class ExpenseServiceImpl(
@@ -51,7 +52,17 @@ class ExpenseServiceImpl(
         return repository.findByDescriptionContaining(description).orElseThrow { NotFoundException("Expense not found for this description: $description") }
     }
 
+    override fun findByYearAndMonth(year: Int, month: Int): List<ExpenseView> {
+        val yearMonth = YearMonth.of(year, month)
+        val startDate = yearMonth.atDay(1)
+        val endDate = yearMonth.atEndOfMonth()
+
+        return repository.findByPaymentDayBetween(startDate, endDate).orElseThrow { NotFoundException("Expense not found for year $year and month $month") }
+    }
+
     fun findByIdOrThrowException(id: Long) : Expense {
         return repository.findById(id).orElseThrow { NotFoundException("Expense not found for id $id") }
     }
+
+
 }

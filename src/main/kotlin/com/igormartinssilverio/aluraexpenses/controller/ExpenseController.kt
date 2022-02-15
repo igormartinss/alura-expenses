@@ -14,7 +14,7 @@ import javax.validation.Valid
 class ExpenseController(val service: ExpenseService) {
 
     @GetMapping
-    fun findAll(@RequestParam(value = "description", required = false) description: String): ResponseEntity<List<ExpenseView>> {
+    fun findAll(@RequestParam(value = "description", required = false) description: String?): ResponseEntity<List<ExpenseView>> {
         return if(description.isNullOrEmpty()) {
             ResponseEntity.ok(service.findAll())
         } else {
@@ -25,6 +25,11 @@ class ExpenseController(val service: ExpenseService) {
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long) : ResponseEntity<ExpenseView> {
         return ResponseEntity.ok(service.findById(id))
+    }
+
+    @GetMapping("/{year}/{month}")
+    fun findByYearAndMonth(@PathVariable year: Int, @PathVariable month: Int): ResponseEntity<List<ExpenseView>> {
+        return ResponseEntity.ok(service.findByYearAndMonth(year, month))
     }
 
     @PostMapping

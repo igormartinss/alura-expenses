@@ -14,7 +14,7 @@ import javax.validation.Valid
 class IncomeController(val service: IncomeService) {
 
     @GetMapping
-    fun findAll(@RequestParam(value = "description", required = false) description: String): ResponseEntity<List<IncomeView>> {
+    fun findAll(@RequestParam(value = "description", required = false) description: String?): ResponseEntity<List<IncomeView>> {
         return if (description.isNullOrEmpty()) {
             ResponseEntity.ok(service.findAll())
         } else {

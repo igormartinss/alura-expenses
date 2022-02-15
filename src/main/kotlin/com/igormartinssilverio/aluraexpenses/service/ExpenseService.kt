@@ -11,4 +11,5 @@ interface ExpenseService {
     fun edit(id: Long, expenseToEdit: ExpenseForm): Expense
     fun delete(id: Long): Expense
     fun findByDescriptionContaining(description: String): List<ExpenseView>
+    fun findByYearAndMonth(year: Int, month: Int): List<ExpenseView>
 }
