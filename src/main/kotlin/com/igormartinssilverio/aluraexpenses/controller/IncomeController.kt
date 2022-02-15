@@ -27,6 +27,11 @@ class IncomeController(val service: IncomeService) {
         return ResponseEntity.ok(service.findById(id))
     }
 
+    @GetMapping("/{year}/{month}")
+    fun findByYearAndMonth(@PathVariable year: Int, @PathVariable month: Int): ResponseEntity<List<IncomeView>> {
+        return ResponseEntity.ok(service.findByYearAndMonth(year, month))
+    }
+
     @PostMapping
     fun create(
         @Valid @RequestBody incomeToCreate: IncomeForm,

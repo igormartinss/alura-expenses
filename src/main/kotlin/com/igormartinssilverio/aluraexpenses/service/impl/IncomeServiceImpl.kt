@@ -9,6 +9,7 @@ import com.igormartinssilverio.aluraexpenses.model.view.IncomeView
 import com.igormartinssilverio.aluraexpenses.repository.IncomeRepository
 import com.igormartinssilverio.aluraexpenses.service.IncomeService
 import org.springframework.stereotype.Service
+import java.time.YearMonth
 
 @Service
 class IncomeServiceImpl(
@@ -47,8 +48,15 @@ class IncomeServiceImpl(
         return income
     }
 
-    override fun findByDescriptionContaining(description: String): List<IncomeView>? {
+    override fun findByDescriptionContaining(description: String): List<IncomeView> {
         return repository.findByDescriptionContaining(description).orElseThrow {NotFoundException("Income not found containing this description: $description") }
+    }
+
+    override fun findByYearAndMonth(year: Int, month: Int): List<IncomeView> {
+        val yearMonth: YearMonth = YearMonth.of(year, month)
+        val startDate = yearMonth.atDay(1)
+        val endDate = yearMonth.atEndOfMonth()
+        return repository.findByPaymentDayBetween(startDate,endDate).orElseThrow { NotFoundException("Income not found for year $year and month $month") }
     }
 
     fun findByIdOrElseThrow(id: Long) : Income {
