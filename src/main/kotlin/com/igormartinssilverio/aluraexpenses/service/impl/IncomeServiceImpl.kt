@@ -47,6 +47,10 @@ class IncomeServiceImpl(
         return income
     }
 
+    override fun findByDescriptionContaining(description: String): List<IncomeView>? {
+        return repository.findByDescriptionContaining(description).orElseThrow {NotFoundException("Income not found containing this description: $description") }
+    }
+
     fun findByIdOrElseThrow(id: Long) : Income {
        return repository.findById(id).orElseThrow { NotFoundException("Income not found for id $id") }
     }

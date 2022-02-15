@@ -14,8 +14,12 @@ import javax.validation.Valid
 class ExpenseController(val service: ExpenseService) {
 
     @GetMapping
-    fun findAll(): ResponseEntity<List<ExpenseView>> {
-        return ResponseEntity.ok(service.findAll())
+    fun findAll(@RequestParam(value = "description", required = false) description: String): ResponseEntity<List<ExpenseView>> {
+        return if(description.isNullOrEmpty()) {
+            ResponseEntity.ok(service.findAll())
+        } else {
+            ResponseEntity.ok(service.findByDescriptionContaining(description))
+        }
     }
 
     @GetMapping("/{id}")

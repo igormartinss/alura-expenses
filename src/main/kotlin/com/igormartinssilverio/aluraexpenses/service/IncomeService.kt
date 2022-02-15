@@ -10,4 +10,5 @@ interface IncomeService {
     fun findById(id: Long): IncomeView
     fun edit(id: Long, incomeToEdit: IncomeForm) : Income
     fun delete(id: Long) : Income
+    fun findByDescriptionContaining(description: String): List<IncomeView>?
 }

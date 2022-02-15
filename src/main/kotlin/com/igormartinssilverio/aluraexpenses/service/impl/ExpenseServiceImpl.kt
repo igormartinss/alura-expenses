@@ -47,6 +47,10 @@ class ExpenseServiceImpl(
         return expense
     }
 
+    override fun findByDescriptionContaining(description: String): List<ExpenseView> {
+        return repository.findByDescriptionContaining(description).orElseThrow { NotFoundException("Expense not found for this description: $description") }
+    }
+
     fun findByIdOrThrowException(id: Long) : Expense {
         return repository.findById(id).orElseThrow { NotFoundException("Expense not found for id $id") }
     }

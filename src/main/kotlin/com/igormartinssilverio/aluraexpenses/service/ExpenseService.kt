@@ -10,4 +10,5 @@ interface ExpenseService {
     fun create(expenseToCreate: ExpenseForm): Expense
     fun edit(id: Long, expenseToEdit: ExpenseForm): Expense
     fun delete(id: Long): Expense
+    fun findByDescriptionContaining(description: String): List<ExpenseView>
 }
