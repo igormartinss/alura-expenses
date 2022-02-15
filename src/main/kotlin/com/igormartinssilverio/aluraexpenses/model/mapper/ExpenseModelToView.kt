@@ -10,7 +10,8 @@ class ExpenseModelToView : Mapper<Expense, ExpenseView>{
         return ExpenseView(
             description = model.description,
             value = model.value,
-            paymentDay = model.paymentDay
+            paymentDay = model.paymentDay,
+            category = model.category
         )
     }
 }

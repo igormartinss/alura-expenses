@@ -11,7 +11,8 @@ class ExpenseFormToModelMapper : Mapper<ExpenseForm, Expense> {
         return Expense(
             description = form.description,
             value = form.value,
-            paymentDay = form.paymentDay
+            paymentDay = form.paymentDay,
+            category = form.category
         )
     }
 
